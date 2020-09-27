@@ -1,2 +1,2 @@
 # simplyPi_BITS_RMIT
-Repoistory for simplyPi's RaspberryPlant
+Repository for simplyPi's RaspberryPlant
