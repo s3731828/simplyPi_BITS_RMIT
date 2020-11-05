@@ -8,7 +8,7 @@ sensor = adafruit_tsl2591.TSL2591(i2c)
 #print('Light: {0}lux'.format(sensor.lux))
 #print('Visible: {0}'.format(sensor.visible))
 #print('Infrared: {0}'.format(sensor.infrared))
-sensor.gain = adafruit_tsl2591.GAIN_LOW
+sensor.gain = adafruit_tsl2591.GAIN_MED
 
 while True:
     visible = sensor.visible
