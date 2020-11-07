@@ -1,0 +1,103 @@
+/***************************************************
+ This example reads Capacitive Soil Moisture Sensor.
+ 
+ Created 2015-10-21
+ By berinie Chen <bernie.chen@dfrobot.com>
+ 
+ GNU Lesser General Public License.
+ See <http://www.gnu.org/licenses/> for details.
+ All above must be included in any redistribution
+ ****************************************************/
+ 
+/* 
+Make sure you have installed I2C support on your Pi.   Type “i2cdetect -y 1” and you should see this
+Now install the ADC software.
+git clone https://github.com/switchdoclabs/SDL_Pi_Grove4Ch16BitADC.git
+*/
+
+Next, cd SDL_Pi_Grove4Ch16BitADC
+
+Now start the program with your sensor in free air:
+
+pi@switchdoclabs:~/SDL_Pi_Grove4Ch16BitADC $ sudo python TestGrove4Ch16BitADC.py
+
+--------------------
+Channel 0 =2.849625V raw=0x590B dec=22795
+Channel 1 =0.567000V raw=0x11E8 dec=4584
+Channel 2 =0.561500V raw=0x11D0 dec=4560
+Channel 3 =0.561500V raw=0x11C0 dec=4544
+--------------------
+--------------------
+Channel 0 =2.849625V raw=0x590B dec=22795
+Channel 1 =0.566500V raw=0x11F0 dec=4592
+Channel 2 =0.561000V raw=0x11CD dec=4557
+Channel 3 =0.560625V raw=0x11BB dec=4539
+--------------------
+
+The value of interest right now is Channel 0 (the decimal value) 22795.    This represents “Dry”.
+
+Putting the sensor in a glass of water (keep the electronics out of the water!!!!!) yields the following:
+
+pi@switchdoclabs:~/SDL_Pi_Grove4Ch16BitADC $ sudo python TestGrove4Ch16BitADC.py
+--------------------
+Channel 0 =1.694875V raw=0x34EE dec=13550
+Channel 1 =0.564750V raw=0x11E9 dec=4585
+Channel 2 =0.560375V raw=0x11C7 dec=4551
+Channel 3 =0.561250V raw=0x11BB dec=4539
+--------------------
+--------------------
+Channel 0 =1.600250V raw=0x31FB dec=12795
+Channel 1 =0.564875V raw=0x11E8 dec=4584
+Channel 2 =0.560250V raw=0x11CC dec=4556
+Channel 3 =0.560750V raw=0x11BA dec=4538
+--------------------
+--------------------
+Channel 0 =1.542625V raw=0x3031 dec=12337
+Channel 1 =0.563875V raw=0x11E2 dec=4578
+Channel 2 =0.559500V raw=0x11C1 dec=4545
+Channel 3 =0.559500V raw=0x11AD dec=4525
+--------------------
+Now we have the dry and the wet values.   Next, we put it in a moist pot.
+
+ 
+
+pi@switchdoclabs:~/SDL_Pi_Grove4Ch16BitADC $ sudo python TestGrove4Ch16BitADC.py
+--------------------
+Channel 0 =1.855625V raw=0x39FC dec=14844
+Channel 1 =0.564875V raw=0x11E7 dec=4583
+Channel 2 =0.560625V raw=0x11CA dec=4554
+Channel 3 =0.561375V raw=0x11BA dec=4538
+--------------------
+--------------------
+Channel 0 =1.857000V raw=0x3A08 dec=14856
+Channel 1 =0.564625V raw=0x11E5 dec=4581
+Channel 2 =0.560625V raw=0x11CC dec=4556
+Channel 3 =0.560125V raw=0x11B5 dec=4533
+--------------------
+--------------------
+Channel 0 =1.858375V raw=0x3A12 dec=14866
+Channel 1 =0.564250V raw=0x11E3 dec=4579
+Channel 2 =0.560000V raw=0x11C4 dec=4548
+Channel 3 =0.559500V raw=0x11B2 dec=4530
+--------------------
+We can see now that the “moist” value is about 14866.   Our Capacitive soil sensor works!
+
+/*
+What do the Values really mean?
+
+As mentioned before, a simple conversion to a “percent” moisture assumes linearity, so the following software is not a valid, calibrated scientific measurement.   
+It’s hard to do in general as we need to have a calibrated moisture source to compare it against and then take multiple samples to curve fit the data to in order to produce a valid equation.   
+But it gets worse as the moisture measurement will also be affected by the density of the soil, the amount of fertilizer in the soil, temperature and other factors.   
+Keep this in mind!  But we still get some useful data out the linear equation.
+*/
+
+/*
+Final Comment about Resistive versus Capacitive Soil Moisture Sensors
+During the development of the Smart Garden System we spent a lot of time working with the sensors and developing decent 
+(but nowhere near perfect or calibrated) values to determine when to water plants.   
+We used up to 9 sensors at a time and to test things we would plug all of them into a single pot to measure the moisture.   
+When doing this with our resistive sensors, we found all sorts of weird and bad data.  Things weren’t working any way we thought they would.  
+Then we realized what was going on.  When you plug more than one resistive sensor in the same pot, there are multiple ways for the current to go from one sensor ground and another.  
+So the values change when you plug more resistive sensors in the same pot.  A lesson to be learned.
+Plugging multiple Capacitor sensors, as long as they weren’t too close, produced the expected values.
+*/
