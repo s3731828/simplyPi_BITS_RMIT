@@ -1,10 +1,12 @@
 import os
-import keyboard
-while True:
-     try: 
-        if keyboard.is_pressed('t'):
-            print('You Pressed A Key!')
-            break  # finishing the loop
-    except:
-        break  # if user pressed a key other than the given key the loop will break
-os.system('python3 Transmitter.py -p 1615 -t 4 12345')
+from pynput import keyboard
+
+def on_press(key):
+    try:
+        if key == keyboard.Key.esc:
+            os.system('python3 Transmitter.py -p 1615 -t 4 12345')
+    except AttributeError:
+            print('')
+listener = keyboard.Listener(
+    on_press=on_press)
+listener.start()
