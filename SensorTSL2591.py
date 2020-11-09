@@ -25,6 +25,7 @@ while True:
     print('Visible',visible)
     print('Infrared',infrared)
     print('All',lux)
+    print('*****'*5)
     time.sleep(3)
 
 # Typical ranges:
