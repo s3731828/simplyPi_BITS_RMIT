@@ -1,0 +1,17 @@
+from rpi_rf import RFDevice
+GPIO = 17
+Repeat = 10
+
+Code = 12345
+Protocol = 3
+Pulselength = 307
+Length = 24
+
+
+rfdevice = RFDevice(GPIO)
+rfdevice.enable_tx()
+rfdevice.tx_repeat = Repeat
+
+rfdevice.tx_code(Code, Protocol, Pulselength, Length)
+print('Code Sent:' +str(Code))
+rfdevice.cleanup()
