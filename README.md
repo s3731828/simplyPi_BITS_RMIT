@@ -3,12 +3,18 @@
 <head>
 <title>RaspberryPlant</title>
 <meta charset="UTF-8">
+<meta http-equiv="refresh" content="30">
 <link rel="stylesheet" href="styles/layout.css" type="text/css">
 <!--[if lt IE 9]><script src="scripts/html5shiv.js"></script><![endif]-->
+<style>.box {
+  display: flex;
+  align-content: space-evenly;
+  justify-content: center;
+}</style>
 </head>
 <body>
 <!-- content -->
-<div class="wrapper row1">
+<div class="wrapper row16">
   <div id="container" class="clear">
 	
     <center><section id="slider"><img src="images/demo/plant_logo.png" alt=""></a></section><center/>
@@ -19,9 +25,8 @@
     <section>
 		<div class="centered">
         <article>
-          <h2>Spreadsheet published here</h2>
-         
-        </article>
+        <iframe width="610" height="260" seamless frame="0" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTm7tMR4bPk3Wgym-JlFXQPs-E7dhbSBQlYZsz_aIsGfZm7jrBorQ-W3LZfEu8CnGGbMR8BZ2iLjdgy/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+		</article>
 		</div>
     </section>
       <!-- ########################################################################################## -->
@@ -31,12 +36,14 @@
     </div>
 	
 	<section>
-		<div class="row1">
-			<div class="column">
+		<div class="flex-container">
+			<div class="box">
+			<a href="box">
+			<div>
 			<img src="images/demo/rounded-rectangle1.png" width= "250" height= "150">
+			<img src="images/demo/rounded-rectangle2.png" width= "250" height= "150">
+			 </a>
 			</div>
-		<div class="column">
-			<img src="images/demo/rounded-rectangle2.png" width= "250" height= "150"
 			</div>
 		</div>
 		</section>
